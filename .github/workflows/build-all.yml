@@ -37,7 +37,7 @@ jobs:
           then
             CHANGED_DIRS=$(git diff --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} | xargs -I {} dirname {})
           else
-            CHANGED_DIRS==$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }} | xargs -I {} dirname {})
+            CHANGED_DIRS=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }} | xargs -I {} dirname {})
           fi
           echo "${CHANGED_DIRS}"
 
