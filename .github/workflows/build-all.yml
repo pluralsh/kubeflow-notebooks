@@ -38,7 +38,6 @@ jobs:
           else
             CHANGED_DIRS==$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }} | xargs -I {} dirname {})
           fi
-
           echo "${CHANGED_DIRS}"
 
           CONTAINER_FOLDERS=$(for CHANGED_DIR in ${CHANGED_DIRS}; do echo ${CHANGED_DIR} | awk -F "/" '{print $1}'; done | sort -u)
@@ -53,7 +52,7 @@ jobs:
             fi
           done
 
-          DOCKERFILES=$(for CHANGED_DIR in ${CHANGED_DIRS}; do find ${CHANGED_DIR} -name "*Dockerfile"; done | sort -u)
+          DOCKERFILES=$(for CHANGED_DIR in ${CHANGED_DIRS}; do; if [ "${CHANGED_DIR}" != "."* ]; then; find ${CHANGED_DIR} -name "*Dockerfile"; fi; done | sort -u)
           echo "${DOCKERFILES}"
           MATRIX_PROJECTS_JSON="["
           MATRIX_INCLUDE_JSON="["
