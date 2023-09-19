@@ -57,18 +57,6 @@ RUN apt-get -yq update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-# tensorflow fix - CUDA profiling, tensorflow requires CUPTI
-ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
-
-# tensorflow fix - wrong libcuda lib path (+ reconfigure dynamic linker run-time bindings)
-RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1 \
- && echo "/usr/local/cuda/lib64/stubs" > /etc/ld.so.conf.d/z-cuda-stubs.conf \
- && ldconfig
-
-# tensorflow fix - wrong libcusolver lib path
-# https://github.com/tensorflow/tensorflow/issues/43947#issuecomment-748273679
-RUN ln -s /usr/local/cuda-${CUDA_VERSION}/targets/x86_64-linux/lib/libcusolver.so.11 /usr/local/cuda-${CUDA_VERSION}/targets/x86_64-linux/lib/libcusolver.so.10
-
 # tensorflow fix - some tensorflow tools expect a `python` binary
 RUN ln -s $(which python3) /usr/local/bin/python
 
