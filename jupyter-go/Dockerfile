@@ -4,7 +4,7 @@ USER root
 
 # args - software versions
  # renovate: datasource=docker depName=golang versioning=docker
-ARG GO_VERSION=1.20.8
+ARG GO_VERSION=1.21.1
  # renovate: datasource=github-tags depName=gopherdata/gophernotes versioning=semver
 ARG GOPHERNOTES_VERSION=v0.7.5
 
