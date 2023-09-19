@@ -53,7 +53,7 @@ jobs:
             fi
           done
 
-          DOCKERFILES=$(for CHANGED_DIR in ${CHANGED_DIRS}; do; if [[ "${CHANGED_DIR}" != "."* ]]; then; find ${CHANGED_DIR} -name "*Dockerfile"; fi; done | sort -u)
+          DOCKERFILES=$(for CHANGED_DIR in ${CHANGED_DIRS}; do if [[ "${CHANGED_DIR}" != "."* ]]; then find ${CHANGED_DIR} -name "*Dockerfile"; fi; done | sort -u)
           echo "${DOCKERFILES}"
           MATRIX_PROJECTS_JSON="["
           MATRIX_INCLUDE_JSON="["
