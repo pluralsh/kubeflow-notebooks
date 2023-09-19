@@ -24,7 +24,7 @@ jobs:
     - name: 'Setup Node'
       uses: actions/setup-node@v3
       with:
-        node-version: 18.12.1
+        node-version: 18.18.0
     - name: Install Semantic Release Plus
       run: npm install -g semantic-release-plus @semantic-release/exec
     - name: generate matrix
