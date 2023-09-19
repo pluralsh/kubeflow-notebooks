@@ -6,13 +6,18 @@ USER root
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
 ARG MINIFORGE_VERSION=4.10.3-7
+ # renovate: datasource=conda depName=conda-forge/pip versioning=semver
 ARG PIP_VERSION=21.2.3
+ # renovate: datasource=conda depName=conda-forge/python versioning=semver
 ARG PYTHON_VERSION=3.8.10
 ARG RSTUDIO_ARCH="amd64"
  # renovate: datasource=github-tags depName=rstudio/rstudio versioning=semver
 ARG RSTUDIO_VERSION=v1.4.1717
+ # renovate: datasource=conda depName=conda-forge/r-base versioning=semver
 ARG R_BASE_VERSION=4.1.0
+ # renovate: datasource=conda depName=conda-forge/r-reticulate versioning=semver
 ARG R_RETICULATE_VERSION=1.20
+ # renovate: datasource=conda depName=conda-forge/r-png versioning=loose
 ARG R_PNG_VERSION=0.1_7
 
 # install - binary rstudio dependencies
@@ -52,7 +57,7 @@ USER ${NB_UID}
 RUN curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIFORGE_VERSION}/Miniforge3-${MINIFORGE_VERSION}-Linux-${MINIFORGE_ARCH}.sh" -o /tmp/Miniforge3.sh \
  && curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIFORGE_VERSION}/Miniforge3-${MINIFORGE_VERSION}-Linux-${MINIFORGE_ARCH}.sh.sha256" -o /tmp/Miniforge3.sh.sha256 \
  && echo "$(cat /tmp/Miniforge3.sh.sha256 | awk '{ print $1; }') /tmp/Miniforge3.sh" | sha256sum --check \
- && rm /tmp/Miniforge3.sh.sha256 \ 
+ && rm /tmp/Miniforge3.sh.sha256 \
  && /bin/bash /tmp/Miniforge3.sh -b -f -p ${CONDA_DIR} \
  && rm /tmp/Miniforge3.sh \
  && conda config --system --set auto_update_conda false \
@@ -83,7 +88,7 @@ RUN echo "TZ=${TZ}" >> ${R_HOME}/etc/Renviron.site
 USER root
 
 # install - rstudio-server
-# Affero General Public License may apply to RStudio: https://www.gnu.org/licenses/agpl-3.0.en.html 
+# Affero General Public License may apply to RStudio: https://www.gnu.org/licenses/agpl-3.0.en.html
 RUN curl -sL "https://download2.rstudio.org/server/bionic/${RSTUDIO_ARCH}/rstudio-server-${RSTUDIO_VERSION/v/}-${RSTUDIO_ARCH}.deb" -o /tmp/rstudio-server.deb \
     # add rstudio public code-signing key
  && gpg --keyserver keys.gnupg.net --keyserver pgp.surfnet.nl --recv-keys 3F32EE77E331692F \
