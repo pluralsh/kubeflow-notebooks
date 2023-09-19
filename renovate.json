@@ -53,8 +53,7 @@
       "description": "Automerge everything",
       "matchUpdateTypes": ["major", "minor", "patch"],
       "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true
+      "automergeType": "pr"
     }
   ],
   "labels": [
