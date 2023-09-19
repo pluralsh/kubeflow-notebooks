@@ -52,6 +52,8 @@ RUN apt-get -yq update \
     libzmq3-dev \
     pkg-config \
     python3-libnvinfer=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
+    libnvparsers8=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
+    libnvonnxparsers8=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
