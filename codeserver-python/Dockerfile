@@ -1,18 +1,18 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-codeserver:v1.0.2
+FROM ghcr.io/pluralsh/kubeflow-notebooks-codeserver:2.1.0
 
 USER root
 
 # args - software versions
-ARG CODESERVER_PYTHON_VERSION=2021.5.842923320
-ARG CODESERVER_GITLENS_VERSION=11.4.1
+ARG CODESERVER_PYTHON_VERSION=2023.14.0
+ARG CODESERVER_GITLENS_VERSION=14.2.1
 ARG CODESERVER_GIT_GRAPH_VERSION=1.30.0
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
-ARG MINIFORGE_VERSION=4.10.3-7
+ARG MINIFORGE_VERSION=23.3.1-1
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
-ARG PIP_VERSION=21.1.2
+ARG PIP_VERSION=23.2.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
-ARG PYTHON_VERSION=3.8.10
+ARG PYTHON_VERSION=3.10.12
 
 # update - ensure apt packages are always updated
 RUN export DEBIAN_FRONTEND=noninteractive \
