@@ -9,6 +9,7 @@ ARG CUDA_COMPAT_VERSION=520.61.05-1
 ARG CUDA_CUDART_VERSION=11.8.89-1
 ARG CUDNN_VERSION=8.8.0.121-1
 ARG LIBNVINFER_VERSION=8.5.3-1
+ARG LIBNCCL_VERSION=2.15.5-1
 
 # we need bash's env var character substitution
 SHELL ["/bin/bash", "-c"]
@@ -47,6 +48,7 @@ RUN apt-get -yq update \
     libcusparse-${CUDA_VERSION/./-} \
     libfreetype6-dev \
     libhdf5-serial-dev \
+    libnccl2_${LIBNCCL_VERSION}+cuda${CUDA_VERSION} \
     libnvinfer8=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
     libnvinfer-plugin8=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
     libzmq3-dev \
@@ -54,6 +56,10 @@ RUN apt-get -yq update \
     python3-libnvinfer=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
     libnvparsers8=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
     libnvonnxparsers8=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
+ && apt-mark hold \
+    libcublas-${CUDA_VERSION/./-} \
+    libnccl2+cuda${CUDA_VERSION} \
+    libcudnn8 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
