@@ -2,7 +2,9 @@
   "extends": [
     "config:base",
     ":dependencyDashboard",
+    ":gitSignOff",
     ":prHourlyLimit4",
+    ":semanticCommits",
     ":prConcurrentLimit10"
   ],
   "schedule": [
@@ -16,7 +18,15 @@
       "matchUpdateTypes": [
         "major"
       ],
-      "enabled": true
+      "enabled": true,
+      "commitBody": "BREAKING CHANGE: major release of {{depName}}"
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "semanticCommitScope": "{{baseDir}}",
+      "semanticCommitType": "{{#if isPatch}}fix{{else}}feat{{/if}}"
     },
     {
       "description": "Group Conda and Miniforge",
@@ -43,10 +53,19 @@
       "matchPackagePatterns": ["^torch*[a-z-].*"],
       "groupName": "pytorch",
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<prerelease>[^.-]+)?(-(?<compatibility>.*))?$"
+    },
+    {
+      "description": "Automerge everything",
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
     }
   ],
-  "automerge": true,
-  "dependencyDashboardApproval": true,
+  "labels": [
+    "dependencies"
+  ],
+  "separateMinorPatch": true,
   "regexManagers": [
     {
       "fileMatch": [

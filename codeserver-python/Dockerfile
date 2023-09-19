@@ -9,7 +9,9 @@ ARG CODESERVER_GIT_GRAPH_VERSION=1.30.0
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
 ARG MINIFORGE_VERSION=4.10.3-7
+ # renovate: datasource=conda depName=conda-forge/pip versioning=semver
 ARG PIP_VERSION=21.1.2
+ # renovate: datasource=conda depName=conda-forge/python versioning=semver
 ARG PYTHON_VERSION=3.8.10
 
 # update - ensure apt packages are always updated
