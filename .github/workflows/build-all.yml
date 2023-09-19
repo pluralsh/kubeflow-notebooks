@@ -105,12 +105,6 @@ jobs:
     name: Build and push notebook images
     runs-on: ubuntu-latest
     needs: build-matrix
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-      packages: 'write'
-      security-events: write
-      actions: read
     strategy:
       matrix: ${{ fromJson(needs.build-matrix.outputs.matrix) }}
     steps:
@@ -146,12 +140,12 @@ jobs:
        username: ${{ github.repository_owner }}
        password: ${{ secrets.GITHUB_TOKEN }}
     -
-      name: Build and push
+      name: Build image
       uses: docker/build-push-action@v5
       with:
         context: ${{ matrix.path }}
         file: ${{ matrix.dockerfile }}
-        push: ${{ github.event_name != 'pull_request' }}
+        load: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
     - name: Run Trivy vulnerability scanner
@@ -169,3 +163,11 @@ jobs:
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: 'trivy-results.sarif'
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: ${{ matrix.path }}
+        file: ${{ matrix.dockerfile }}
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
