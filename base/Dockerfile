@@ -13,7 +13,7 @@ ARG KUBECTL_ARCH="amd64"
 ARG KUBECTL_VERSION=v1.28.2
 ARG S6_ARCH="amd64"
  # renovate: datasource=github-tags depName=just-containers/s6-overlay versioning=loose
-ARG S6_VERSION=v2.2.0.3
+ARG S6_VERSION=v3.1.5.0
 
 # set shell to bash
 SHELL ["/bin/bash", "-c"]
