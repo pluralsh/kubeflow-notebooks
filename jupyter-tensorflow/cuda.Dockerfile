@@ -10,6 +10,7 @@ ARG CUDA_CUDART_VERSION=11.8.89-1
 ARG CUDNN_VERSION=8.8.0.121-1
 ARG LIBNVINFER_VERSION=8.5.3-1
 ARG LIBNCCL_VERSION=2.15.5-1
+ARG LIBCUBLAS_VERSION=11.11.3.6-1
 
 # we need bash's env var character substitution
 SHELL ["/bin/bash", "-c"]
@@ -40,7 +41,7 @@ RUN apt-get -yq update \
     cm-super \
     cuda-command-line-tools-${CUDA_VERSION/./-} \
     cuda-nvrtc-${CUDA_VERSION/./-} \
-    libcublas-${CUDA_VERSION/./-} \
+    libcublas-${CUDA_VERSION/./-}=${LIBCUBLAS_VERSION} \
     libcudnn8=${CUDNN_VERSION}+cuda${CUDA_VERSION} \
     libcufft-${CUDA_VERSION/./-} \
     libcurand-${CUDA_VERSION/./-} \
@@ -48,7 +49,7 @@ RUN apt-get -yq update \
     libcusparse-${CUDA_VERSION/./-} \
     libfreetype6-dev \
     libhdf5-serial-dev \
-    libnccl2_${LIBNCCL_VERSION}+cuda${CUDA_VERSION} \
+    libnccl2=${LIBNCCL_VERSION}+cuda${CUDA_VERSION} \
     libnvinfer8=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
     libnvinfer-plugin8=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
     libzmq3-dev \
@@ -58,7 +59,7 @@ RUN apt-get -yq update \
     libnvonnxparsers8=${LIBNVINFER_VERSION}+cuda${CUDA_VERSION} \
  && apt-mark hold \
     libcublas-${CUDA_VERSION/./-} \
-    libnccl2+cuda${CUDA_VERSION} \
+    libnccl2 \
     libcudnn8 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
