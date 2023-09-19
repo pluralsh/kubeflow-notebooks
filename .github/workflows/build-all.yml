@@ -41,7 +41,7 @@ jobs:
           if [ -z "${CHANGED_DIRS}" ];
           then
             CHANGED_DIRS=$(dirname $(git diff --name-only ${{ github.event.before }}..${{ github.event.after }}))
-            if [ "${CHANGED_DIRS}" == "." ];
+            if [ "${CHANGED_DIRS}" == "."* ];
             then
               CHANGED_DIRS=
             fi
