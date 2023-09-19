@@ -9,7 +9,7 @@ ARG MINIFORGE_VERSION=23.3.1-1
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
 ARG PIP_VERSION=23.2.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
-ARG PYTHON_VERSION=3.10.12
+ARG PYTHON_VERSION=3.11.5
 ARG RSTUDIO_ARCH="amd64"
  # renovate: datasource=github-tags depName=rstudio/rstudio versioning=semver
 ARG RSTUDIO_VERSION=v2023.06.2-561 # TODO: figure out how to rewrite `+` from the git tag to `-` for the deb package
