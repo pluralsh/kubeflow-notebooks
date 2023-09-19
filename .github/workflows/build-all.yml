@@ -143,6 +143,7 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
+      if: ${{ matrix.project != 'jupyter-pytorch-cuda' }}
       with:
         scan-type: 'image'
         image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
@@ -154,6 +155,7 @@ jobs:
           #severity: 'CRITICAL,HIGH'
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v2
+      if: ${{ matrix.project != 'jupyter-pytorch-cuda' }}
       with:
         sarif_file: 'trivy-results.sarif'
     - name: Build and push
