@@ -1,6 +1,7 @@
 FROM ghcr.io/pluralsh/kubeflow-notebooks-rstudio:v1.0.3
 
 # args - software versions
+ # renovate: datasource=conda depName=conda-forge/r-tidyverse versioning=semver
 ARG R_TIDYVERSE_VERSION="1.3.1"
 
 # switch to root user for conda installation
