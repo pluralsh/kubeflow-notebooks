@@ -10,11 +10,12 @@ ARG MINIFORGE_VERSION=23.3.1-1
 ARG PIP_VERSION=23.2.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
 ARG PYTHON_VERSION=3.10.12
+ARG NODE_MAJOR=20
 
 # install -- node.js
 RUN export DEBIAN_FRONTEND=noninteractive \
- && curl -sL "https://deb.nodesource.com/gpgkey/nodesource.gpg.key" | apt-key add - \
- && echo "deb https://deb.nodesource.com/node_20.x jammy main" > /etc/apt/sources.list.d/nodesource.list \
+ && curl -sL "https://deb.nodesource.com/gpgkey/nodesource.gpg.key" | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg - \
+ && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x jammy main" > /etc/apt/sources.list.d/nodesource.list \
  && apt-get -yq update \
  && apt-get -yq upgrade \
  && apt-get -yq install --no-install-recommends \
