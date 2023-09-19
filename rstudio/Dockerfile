@@ -1,24 +1,24 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-base:v1.0.1
+FROM ghcr.io/pluralsh/kubeflow-notebooks-base:2.1.0
 
 USER root
 
 # args - software versions
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
-ARG MINIFORGE_VERSION=4.10.3-7
+ARG MINIFORGE_VERSION=23.3.1-1
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
-ARG PIP_VERSION=21.2.3
+ARG PIP_VERSION=23.2.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
-ARG PYTHON_VERSION=3.8.10
+ARG PYTHON_VERSION=3.10.12
 ARG RSTUDIO_ARCH="amd64"
  # renovate: datasource=github-tags depName=rstudio/rstudio versioning=semver
-ARG RSTUDIO_VERSION=v1.4.1717
+ARG RSTUDIO_VERSION=v2023.06.2-561 # TODO: figure out how to rewrite `+` from the git tag to `-` for the deb package
  # renovate: datasource=conda depName=conda-forge/r-base versioning=semver
-ARG R_BASE_VERSION=4.1.0
+ARG R_BASE_VERSION=4.3.1
  # renovate: datasource=conda depName=conda-forge/r-reticulate versioning=semver
-ARG R_RETICULATE_VERSION=1.20
+ARG R_RETICULATE_VERSION=1.32.0
  # renovate: datasource=conda depName=conda-forge/r-png versioning=loose
-ARG R_PNG_VERSION=0.1_7
+ARG R_PNG_VERSION=0.1_8
 
 # install - binary rstudio dependencies
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -26,11 +26,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
  && apt-get -yq upgrade \
  && apt-get -yq install --no-install-recommends \
     dpkg-sig \
+    gdebi-core \
     libapparmor1 \
     libc6 \
     libclang-dev \
     libedit2 \
     libpq5 \
+    libssl-dev \
     psmisc \
     rrdtool \
     sudo \
@@ -78,7 +80,7 @@ RUN curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIF
  && chown -R ${NB_USER}:users ${HOME}
 
 # set default CRAN repo to RSPM (it has pre-compiled R packages, increasing user install speed)
-RUN echo 'options(repos=c(CRAN="https://packagemanager.rstudio.com/all/__linux__/focal/latest"))' >> ${R_HOME}/etc/Rprofile.site \
+RUN echo 'options(repos=c(CRAN="https://packagemanager.rstudio.com/all/__linux__/jammy/latest"))' >> ${R_HOME}/etc/Rprofile.site \
  && echo 'options(HTTPUserAgent=sprintf("R/%s R (%s)", getRversion(), paste(getRversion(), R.version$platform, R.version$arch, R.version$os)))' >> ${R_HOME}/etc/Rprofile.site
 
 # R needs TZ set
@@ -89,16 +91,9 @@ USER root
 
 # install - rstudio-server
 # Affero General Public License may apply to RStudio: https://www.gnu.org/licenses/agpl-3.0.en.html
-RUN curl -sL "https://download2.rstudio.org/server/bionic/${RSTUDIO_ARCH}/rstudio-server-${RSTUDIO_VERSION/v/}-${RSTUDIO_ARCH}.deb" -o /tmp/rstudio-server.deb \
-    # add rstudio public code-signing key
- && gpg --keyserver keys.gnupg.net --keyserver pgp.surfnet.nl --recv-keys 3F32EE77E331692F \
-    # validate the build signature
- && dpkg-sig --verify /tmp/rstudio-server.deb \
- && dpkg -i /tmp/rstudio-server.deb \
+RUN curl -sL "https://download2.rstudio.org/server/jammy/${RSTUDIO_ARCH}/rstudio-server-${RSTUDIO_VERSION/v/}-${RSTUDIO_ARCH}.deb" -o /tmp/rstudio-server.deb \
+ && gdebi --n --q /tmp/rstudio-server.deb \
  && rm -f /tmp/rstudio-server.deb \
-    # our Kaniko build excludes `/var/run/*` but RStudio needs those files,
-    # so we move them to `/run`, wich is actually the same place due to symbolic links
- && mv -n /var/run/rstudio-server* /run \
     # use advisory file-locks to improve PVC support
  && echo "lock-type=advisory" > /etc/rstudio/file-locks \
     # allow kubeflow to display rstudio in an iframe
