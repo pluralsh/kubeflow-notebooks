@@ -1,8 +1,8 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-rstudio:v1.0.3
+FROM ghcr.io/pluralsh/kubeflow-notebooks-rstudio:2.1.0
 
 # args - software versions
  # renovate: datasource=conda depName=conda-forge/r-tidyverse versioning=semver
-ARG R_TIDYVERSE_VERSION="1.3.1"
+ARG R_TIDYVERSE_VERSION=2.0.0
 
 # switch to root user for conda installation
 # (only necessary when installing r-tidyverse with Kaniko)
