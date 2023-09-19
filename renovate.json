@@ -12,9 +12,6 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": [
-        "docker"
-      ],
       "matchUpdateTypes": [
         "major"
       ],
@@ -22,11 +19,15 @@
       "commitBody": "BREAKING CHANGE: major release of {{depName}}"
     },
     {
-      "matchDatasources": [
-        "docker"
-      ],
+      "matchUpdateTypes": ["major", "minor", "patch"],
       "semanticCommitScope": "{{baseDir}}",
       "semanticCommitType": "{{#if isPatch}}fix{{else}}feat{{/if}}"
+    },
+    {
+      "description": "Group Conda and Miniforge",
+      "matchPackagePatterns": ["^conda[^\\s]+?[a-z-].*"],
+      "groupName": "conda",
+      "additionalBranchPrefix": ""
     },
     {
       "description": "Group TensorFlow Docker Tags",
