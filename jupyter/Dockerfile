@@ -1,15 +1,15 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-base:v1.0.1
+FROM ghcr.io/pluralsh/kubeflow-notebooks-base:2.1.0
 
 USER root
 
 # args - software versions
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
-ARG MINIFORGE_VERSION=4.10.3-7
+ARG MINIFORGE_VERSION=23.3.1-1
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
-ARG PIP_VERSION=21.1.2
+ARG PIP_VERSION=23.2.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
-ARG PYTHON_VERSION=3.8.10
+ARG PYTHON_VERSION=3.10.12
 
 # install -- node.js
 RUN export DEBIAN_FRONTEND=noninteractive \
