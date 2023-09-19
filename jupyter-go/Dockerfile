@@ -1,12 +1,12 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-jupyter:v1.0.27
+FROM ghcr.io/pluralsh/kubeflow-notebooks-jupyter:2.2.0
 
 USER root
 
 # args - software versions
  # renovate: datasource=docker depName=golang versioning=docker
-ARG GO_VERSION=1.17
+ARG GO_VERSION=1.20.8
  # renovate: datasource=github-tags depName=gopherdata/gophernotes versioning=semver
-ARG GOPHERNOTES_VERSION=v0.7.3
+ARG GOPHERNOTES_VERSION=v0.7.5
 
 ENV GO_DIR /go
 ENV GOPATH ${GO_DIR}
