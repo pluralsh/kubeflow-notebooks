@@ -8,11 +8,11 @@ ARG CODESERVER_GITLENS_VERSION=11.4.1
 ARG CODESERVER_GIT_GRAPH_VERSION=1.30.0
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
-ARG MINIFORGE_VERSION=4.10.3-7
+ARG MINIFORGE_VERSION=4.10.3-9
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
-ARG PIP_VERSION=21.1.2
+ARG PIP_VERSION=21.1.3
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
-ARG PYTHON_VERSION=3.8.10
+ARG PYTHON_VERSION=3.8.17
 
 # update - ensure apt packages are always updated
 RUN export DEBIAN_FRONTEND=noninteractive \

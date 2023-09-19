@@ -5,20 +5,20 @@ USER root
 # args - software versions
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
-ARG MINIFORGE_VERSION=4.10.3-7
+ARG MINIFORGE_VERSION=4.10.3-9
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
-ARG PIP_VERSION=21.2.3
+ARG PIP_VERSION=21.2.4
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
-ARG PYTHON_VERSION=3.8.10
+ARG PYTHON_VERSION=3.8.17
 ARG RSTUDIO_ARCH="amd64"
  # renovate: datasource=github-tags depName=rstudio/rstudio versioning=semver
 ARG RSTUDIO_VERSION=v1.4.1717
  # renovate: datasource=conda depName=conda-forge/r-base versioning=semver
-ARG R_BASE_VERSION=4.1.0
+ARG R_BASE_VERSION=4.1.3
  # renovate: datasource=conda depName=conda-forge/r-reticulate versioning=semver
 ARG R_RETICULATE_VERSION=1.20
  # renovate: datasource=conda depName=conda-forge/r-png versioning=loose
-ARG R_PNG_VERSION=0.1_7
+ARG R_PNG_VERSION=0.1_8
 
 # install - binary rstudio dependencies
 RUN export DEBIAN_FRONTEND=noninteractive \
