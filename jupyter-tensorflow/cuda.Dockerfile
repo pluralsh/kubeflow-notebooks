@@ -47,6 +47,10 @@ RUN apt-get -yq update \
     libcurand-${CUDA_VERSION/./-} \
     libcusolver-${CUDA_VERSION/./-} \
     libcusparse-${CUDA_VERSION/./-} \
+    cuda-nvcc-${CUDA_VERSION/./-} \
+    cuda-cupti-${CUDA_VERSION/./-} \
+    cuda-nvprune-${CUDA_VERSION/./-} \
+    cuda-libraries-${CUDA_VERSION/./-} \
     libfreetype6-dev \
     libhdf5-serial-dev \
     libnccl2=${LIBNCCL_VERSION}+cuda${CUDA_VERSION} \
