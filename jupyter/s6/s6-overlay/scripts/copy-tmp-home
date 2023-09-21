@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+cp -r -n /tmp_home/* /home/
