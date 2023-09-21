@@ -11,9 +11,9 @@ ENV SHELL /bin/bash
 ARG KUBECTL_ARCH="amd64"
  # renovate: datasource=github-tags depName=kubernetes/kubernetes versioning=semver
 ARG KUBECTL_VERSION=v1.28.2
-ARG S6_ARCH="amd64"
+ARG S6_ARCH="x86_64"
  # renovate: datasource=github-tags depName=just-containers/s6-overlay versioning=loose
-ARG S6_VERSION=v2.2.0.3
+ARG S6_VERSION=v3.1.5.0
 
 # set shell to bash
 SHELL ["/bin/bash", "-c"]
@@ -39,19 +39,18 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     unzip \
     vim \
     wget \
+    xz-utils \
     zip \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # install - s6 overlay
-RUN export GNUPGHOME=/tmp/ \
- && curl -sL "https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-${S6_ARCH}-installer" -o /tmp/s6-overlay-${S6_VERSION}-installer \
- && curl -sL "https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-${S6_ARCH}-installer.sig" -o /tmp/s6-overlay-${S6_VERSION}-installer.sig \
- && gpg --keyserver keys.gnupg.net --keyserver pgp.surfnet.nl --recv-keys 6101B2783B2FD161 \
- && gpg -q --verify /tmp/s6-overlay-${S6_VERSION}-installer.sig /tmp/s6-overlay-${S6_VERSION}-installer \
- && chmod +x /tmp/s6-overlay-${S6_VERSION}-installer \
- && /tmp/s6-overlay-${S6_VERSION}-installer / \
- && rm /tmp/s6-overlay-${S6_VERSION}-installer.sig /tmp/s6-overlay-${S6_VERSION}-installer
+RUN curl -sL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-noarch.tar.xz -o /tmp/s6-overlay-noarch.tar.xz \
+ && curl -sL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-${S6_ARCH}.tar.xz -o /tmp/s6-overlay-${S6_ARCH}.tar.xz \
+ &&  tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz \
+ && tar -C / -Jxpf /tmp/s6-overlay-${S6_ARCH}.tar.xz \
+ && rm /tmp/s6-overlay-noarch.tar.xz \
+ && rm /tmp/s6-overlay-${S6_ARCH}.tar.xz
 
 # install - kubectl
 RUN curl -sL "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/${KUBECTL_ARCH}/kubectl" -o /usr/local/bin/kubectl \
@@ -65,7 +64,7 @@ RUN useradd -M -s /bin/bash -N -u ${NB_UID} ${NB_USER} \
  && mkdir -p ${HOME} \
  && chown -R ${NB_USER}:users ${HOME} \
  && chown -R ${NB_USER}:users /usr/local/bin \
- && chown -R ${NB_USER}:users /etc/s6
+ && chown -R ${NB_USER}:users /etc/s6-overlay
 
 # set locale configs
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
