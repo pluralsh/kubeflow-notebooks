@@ -20,7 +20,6 @@
     },
     {
       "matchUpdateTypes": ["major", "minor", "patch"],
-      "semanticCommitScope": "{{baseDir}}",
       "semanticCommitType": "{{#if isPatch}}fix{{else}}feat{{/if}}"
     },
     {
