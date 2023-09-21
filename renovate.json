@@ -51,7 +51,7 @@
     {
       "description": "Automerge everything",
       "matchUpdateTypes": ["major", "minor", "patch"],
-      "automerge": false,
+      "automerge": true,
       "automergeType": "pr"
     }
   ],
