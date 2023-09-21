@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+# using rstudio with non-root and `--auth-none=1` inexplicably requires USER to be set
+export USER=${NB_USER}
+
+/usr/lib/rstudio-server/bin/rserver \
+  --server-daemonize=0 \
+  --server-working-dir=${HOME} \
+  --server-user=${NB_USER} \
+  --www-address=0.0.0.0 \
+  --www-port=8888 \
+  --auth-none=1 \
+  --rsession-which-r=$(which R) \
+  --rsession-path=/opt/rsession.sh

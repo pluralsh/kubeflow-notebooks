@@ -1,4 +1,4 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-base:2.1.0
+FROM ghcr.io/pluralsh/kubeflow-notebooks-base:2.2.0
 
 USER root
 
@@ -106,7 +106,6 @@ RUN curl -sL "https://download2.rstudio.org/server/jammy/${RSTUDIO_ARCH}/rstudio
 
 # tell rstudio to use conda python by setting `RETICULATE_PYTHON` with `--rsession-path=/opt/rsession.sh`
 COPY --chown=jovyan:users rsession.sh /opt
-RUN chmod +x /opt/rsession.sh
 
 # s6 - copy scripts
 COPY --chown=jovyan:users s6/ /etc

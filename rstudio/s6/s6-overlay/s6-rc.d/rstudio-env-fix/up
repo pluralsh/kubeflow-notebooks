@@ -1,0 +1,3 @@
+with-contenv
+
+/etc/s6-overlay/scripts/rstudio-env-fix
