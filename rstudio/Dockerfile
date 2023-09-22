@@ -11,8 +11,8 @@ ARG PIP_VERSION=23.2.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
 ARG PYTHON_VERSION=3.11.5
 ARG RSTUDIO_ARCH="amd64"
- # renovate: datasource=github-tags depName=rstudio/rstudio versioning=semver
-ARG RSTUDIO_VERSION=v2023.06.2-561 # TODO: figure out how to rewrite `+` from the git tag to `-` for the deb package
+ # renovate: datasource=github-tags depName=rstudio/rstudio versioning=loose
+ARG RSTUDIO_VERSION=2023.06.2+561
  # renovate: datasource=conda depName=conda-forge/r-base versioning=semver
 ARG R_BASE_VERSION=4.3.1
  # renovate: datasource=conda depName=conda-forge/r-reticulate versioning=semver
@@ -91,7 +91,7 @@ USER root
 
 # install - rstudio-server
 # Affero General Public License may apply to RStudio: https://www.gnu.org/licenses/agpl-3.0.en.html
-RUN curl -sL "https://download2.rstudio.org/server/jammy/${RSTUDIO_ARCH}/rstudio-server-${RSTUDIO_VERSION/v/}-${RSTUDIO_ARCH}.deb" -o /tmp/rstudio-server.deb \
+RUN curl -sL "https://download2.rstudio.org/server/jammy/${RSTUDIO_ARCH}/rstudio-server-${RSTUDIO_VERSION/+/-}-${RSTUDIO_ARCH}.deb" -o /tmp/rstudio-server.deb \
  && gdebi --n --q /tmp/rstudio-server.deb \
  && rm -f /tmp/rstudio-server.deb \
     # use advisory file-locks to improve PVC support
