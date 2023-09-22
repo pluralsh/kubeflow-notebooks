@@ -46,7 +46,13 @@
       "description": "Group PyTorch packages",
       "matchPackagePatterns": ["^torch*[a-z-].*"],
       "groupName": "pytorch",
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<prerelease>[^.-]+)?(-(?<compatibility>.*))?$"
+      "additionalBranchPrefix": ""
+    },
+    {
+      "description": "RStudio",
+      "matchPackageNames": ["rstudio/rstudio"],
+      "groupName": "rstudio",
+      "extractVersion": "^v(?<version>.*)$"
     },
     {
       "description": "Automerge everything",
