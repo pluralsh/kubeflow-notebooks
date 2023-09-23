@@ -1,6 +1,6 @@
 # kubeflow packages
 # elyra==3.15.0 # Temporarily disable due to incompatibility with JupyterLab 4.x and kfp v2
-kfp==2.2.0
+kfp==2.3.0
 kfp-server-api==2.0.1
 kserve==0.11.1
 
