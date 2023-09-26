@@ -19,7 +19,7 @@ ipympl==0.9.3
 ipywidgets==8.1.1
 matplotlib==3.8.0
 numba==0.58.0
-numexpr==2.8.6
+numexpr==2.8.7
 openpyxl==3.1.2
 pandas==2.1.1
 patsy==0.5.3
