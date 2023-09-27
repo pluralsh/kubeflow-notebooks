@@ -59,6 +59,7 @@ RUN curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIF
 
 # install - requirements.txt
 COPY --chown=jovyan:users requirements.txt /tmp
+COPY --chown=jovyan:users requirements.txt /protected-packages.txt
 RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir \
  && rm -f /tmp/requirements.txt \
  && jupyter lab --generate-config \
