@@ -61,7 +61,6 @@ RUN curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIF
 COPY --chown=jovyan:users requirements.txt /tmp
 COPY --chown=jovyan:users requirements.txt /protected-packages.txt
 RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir \
- && cat /tmp/requirements.txt >> /protected-packages.txt \
  && rm -f /tmp/requirements.txt \
  && jupyter lab --generate-config \
  && rm -rf ${HOME}/.cache/yarn \
