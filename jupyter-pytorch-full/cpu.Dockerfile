@@ -1,4 +1,4 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-jupyter-pytorch:2.3.0
+FROM ghcr.io/pluralsh/kubeflow-notebooks-jupyter-pytorch:2.4.0
 
 USER root
 
@@ -13,6 +13,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 # install - requirements.txt
 COPY --chown=jovyan:users requirements.txt /tmp/requirements.txt
-RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir \
+RUN python3 -m pip install --constraint /protected-packages.txt -r /tmp/requirements.txt --quiet --no-cache-dir \
  && rm -f /tmp/requirements.txt \
  && jupyter lab build
