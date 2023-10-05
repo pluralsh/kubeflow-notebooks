@@ -46,7 +46,8 @@
       "description": "Group PyTorch packages",
       "matchPackagePatterns": ["^torch*[a-z-].*"],
       "groupName": "pytorch",
-      "additionalBranchPrefix": ""
+      "additionalBranchPrefix": "",
+      "extractVersion": "^(?<version>[0-9]+\\.[0-9]+?\\.[0-9]+)(\\+.*)?$"
     },
     {
       "description": "RStudio",
