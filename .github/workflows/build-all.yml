@@ -3,8 +3,6 @@ name: Build Notebook Images
 on:
   push:
     branches: [ main ]
-    # tags:
-    # - 'v*.*.*'
   pull_request:
     branches:
       - 'main'
@@ -138,13 +136,13 @@ jobs:
       with:
         context: ${{ matrix.path }}
         file: ${{ matrix.dockerfile }}
-        load: true
+        push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         platforms: linux/amd64
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
-      if: contains(matrix.project, 'cuda') == false
+      if: contains(matrix.project, 'cuda') == false && github.event_name != 'pull_request'
       with:
         scan-type: 'image'
         image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
@@ -156,15 +154,6 @@ jobs:
           #severity: 'CRITICAL,HIGH'
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v2
-      if: contains(matrix.project, 'cuda') == false
+      if: contains(matrix.project, 'cuda') == false && github.event_name != 'pull_request'
       with:
         sarif_file: 'trivy-results.sarif'
-    - name: Build and push
-      uses: docker/build-push-action@v5
-      with:
-        context: ${{ matrix.path }}
-        file: ${{ matrix.dockerfile }}
-        push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
-        platforms: linux/amd64
