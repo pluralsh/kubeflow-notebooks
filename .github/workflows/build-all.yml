@@ -142,7 +142,7 @@ jobs:
         platforms: linux/amd64
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
-      if: contains(matrix.project, 'cuda') == false && github.event_name != 'pull_request'
+      if: contains(matrix.project, 'cuda') == false
       with:
         scan-type: 'image'
         image-ref: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
@@ -154,6 +154,6 @@ jobs:
           #severity: 'CRITICAL,HIGH'
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v2
-      if: contains(matrix.project, 'cuda') == false && github.event_name != 'pull_request'
+      if: contains(matrix.project, 'cuda') == false
       with:
         sarif_file: 'trivy-results.sarif'
