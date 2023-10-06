@@ -1,4 +1,4 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-jupyter-tensorflow:2.5.0
+FROM ghcr.io/pluralsh/kubeflow-notebooks-jupyter-tensorflow:2.5.1
 
 USER root
 
