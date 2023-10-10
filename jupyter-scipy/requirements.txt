@@ -8,7 +8,7 @@ kserve==0.11.1
 # https://github.com/jupyter/docker-stacks/blob/main/images/scipy-notebook/Dockerfile
 altair==5.1.2
 beautifulsoup4==4.12.2
-bokeh==3.2.2
+bokeh==3.3.0
 bottleneck==1.3.7
 cloudpickle==2.2.1
 cython==3.0.3
