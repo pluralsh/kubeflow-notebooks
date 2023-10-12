@@ -1,4 +1,4 @@
 jupyterlab==4.0.7
 jupyterlab-git==0.43.0
-notebook==7.0.4
+notebook==7.0.5
 ipykernel==6.25.2
