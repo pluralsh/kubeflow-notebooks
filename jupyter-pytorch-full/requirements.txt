@@ -19,4 +19,4 @@ seaborn==0.13.0
 xgboost==2.0.0
 
 # pytorch packages
-fastai==2.7.12
+fastai==2.7.13
