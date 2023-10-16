@@ -6,7 +6,7 @@ kserve==0.11.1
 
 # common packages
 bokeh==3.3.0
-cloudpickle==2.2.1
+cloudpickle==3.0.0
 dill==0.3.7
 ipympl==0.9.3
 ipywidgets==8.1.1
