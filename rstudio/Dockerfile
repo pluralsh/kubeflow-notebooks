@@ -12,7 +12,7 @@ ARG PIP_VERSION=23.2.1
 ARG PYTHON_VERSION=3.11.6
 ARG RSTUDIO_ARCH="amd64"
  # renovate: datasource=github-tags depName=rstudio/rstudio versioning=loose
-ARG RSTUDIO_VERSION=2023.09.0+463
+ARG RSTUDIO_VERSION=2023.09.1+494
  # renovate: datasource=conda depName=conda-forge/r-base versioning=semver
 ARG R_BASE_VERSION=4.3.1
  # renovate: datasource=conda depName=conda-forge/r-reticulate versioning=semver
