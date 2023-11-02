@@ -7,7 +7,7 @@ ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
 ARG MINIFORGE_VERSION=23.3.1-1
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
-ARG PIP_VERSION=23.2.1
+ARG PIP_VERSION=23.3.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
 ARG PYTHON_VERSION=3.11.6
 ARG RSTUDIO_ARCH="amd64"
