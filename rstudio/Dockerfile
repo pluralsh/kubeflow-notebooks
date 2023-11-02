@@ -78,7 +78,7 @@ RUN curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIF
     r-base=${R_BASE_VERSION} \
     r-reticulate=${R_RETICULATE_VERSION} \
     r-png=${R_PNG_VERSION} \
- && echo "conda ${MINIFORGE_VERSION:0:-2}" >> ${CONDA_DIR}/conda-meta/pinned \
+ && echo "conda ${CONDA_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
  && echo "mamba ${MAMBA_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
  && echo "python ${PYTHON_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
  && echo "r-base ${R_BASE_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
