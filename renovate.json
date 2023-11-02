@@ -23,12 +23,6 @@
       "semanticCommitType": "{{#if isPatch}}fix{{else}}feat{{/if}}"
     },
     {
-      "description": "Group Conda and Miniforge",
-      "matchPackagePatterns": ["^conda[^\\s]+?[a-z-].*"],
-      "groupName": "conda",
-      "additionalBranchPrefix": ""
-    },
-    {
       "description": "Group TensorFlow Docker Tags",
       "matchPackagePatterns": ["jupyter-tensorflow[-cuda]?"],
       "matchDatasources": ["docker"],
