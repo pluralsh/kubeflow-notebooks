@@ -6,6 +6,10 @@ USER root
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
 ARG MINIFORGE_VERSION=23.3.1-1
+ # renovate: datasource=conda depName=conda-forge/conda versioning=semver
+ARG CONDA_VERSION=23.9.0
+ # renovate: datasource=conda depName=conda-forge/mamba versioning=semver
+ARG MAMBA_VERSION=1.5.3
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
 ARG PIP_VERSION=23.3.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
@@ -31,6 +35,8 @@ RUN mkdir -p ${CONDA_DIR} \
  && echo ". /opt/conda/etc/profile.d/conda.sh" >> /etc/profile \
  && echo "conda activate base" >> ${HOME}/.bashrc \
  && echo "conda activate base" >> /etc/profile \
+ && echo "mamba activate base" >> ${HOME}/.bashrc \
+ && echo "mamba activate base" >> /etc/profile \
  && chown -R ${NB_USER}:users ${CONDA_DIR} \
  && chown -R ${NB_USER}:users ${HOME}
 
@@ -46,14 +52,19 @@ RUN curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIF
  && rm /tmp/Miniforge3.sh \
  && conda config --system --set auto_update_conda false \
  && conda config --system --set show_channel_urls true \
- && echo "conda ${MINIFORGE_VERSION:0:-2}" >> ${CONDA_DIR}/conda-meta/pinned \
- && echo "python ${PYTHON_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
- && conda install -y -q \
+ && mamba install -y -q \
     python=${PYTHON_VERSION} \
-    conda=${MINIFORGE_VERSION:0:-2} \
+    conda=${CONDA_VERSION} \
     pip=${PIP_VERSION} \
- && conda update -y -q --all \
- && conda clean -a -f -y \
+    mamba=${MAMBA_VERSION} \
+ && echo "conda ${CONDA_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
+ && echo "mamba ${MAMBA_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
+ && echo "python ${PYTHON_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
+ && echo "pip ${PIP_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
+ && mamba update -y -q --all \
+ && mamba clean -a -f -y \
+ && find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
+ && find ${CONDA_DIR} -follow -type f -name '*.pyc' -delete \
  && chown -R ${NB_USER}:users ${CONDA_DIR} \
  && chown -R ${NB_USER}:users ${HOME}
 
