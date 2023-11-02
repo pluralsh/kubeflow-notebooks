@@ -3,8 +3,8 @@ FROM ghcr.io/pluralsh/kubeflow-notebooks-codeserver:2.4.0
 USER root
 
 # args - software versions
-ARG CODESERVER_PYTHON_VERSION=2023.14.0
-ARG CODESERVER_GITLENS_VERSION=14.2.1
+ARG CODESERVER_PYTHON_VERSION=2023.20.0
+ARG CODESERVER_GITLENS_VERSION=14.4.1
 ARG CODESERVER_GIT_GRAPH_VERSION=1.30.0
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
