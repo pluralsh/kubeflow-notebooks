@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0 # No shallow clone, we need all history
           token: ${{ secrets.PLURAL_BOT_PAT }}
     - name: 'Setup Node'
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18.18.0
     - name: Install Semantic Release Plus
