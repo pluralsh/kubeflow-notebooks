@@ -7,16 +7,16 @@ ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
 ARG MINIFORGE_VERSION=23.3.1-1
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
-ARG PIP_VERSION=23.2.1
+ARG PIP_VERSION=23.3.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
-ARG PYTHON_VERSION=3.11.6
+ARG PYTHON_VERSION=3.12.0
 ARG RSTUDIO_ARCH="amd64"
  # renovate: datasource=github-tags depName=rstudio/rstudio versioning=loose
 ARG RSTUDIO_VERSION=2023.09.1+494
  # renovate: datasource=conda depName=conda-forge/r-base versioning=semver
 ARG R_BASE_VERSION=4.3.2
  # renovate: datasource=conda depName=conda-forge/r-reticulate versioning=semver
-ARG R_RETICULATE_VERSION=1.32.0
+ARG R_RETICULATE_VERSION=1.34.0
  # renovate: datasource=conda depName=conda-forge/r-png versioning=loose
 ARG R_PNG_VERSION=0.1_8
 
