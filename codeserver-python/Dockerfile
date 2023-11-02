@@ -65,13 +65,6 @@ RUN curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIF
  && chown -R ${NB_USER}:users ${CONDA_DIR} \
  && chown -R ${NB_USER}:users ${HOME}
 
-# install - requirements.txt
-COPY --chown=jovyan:users requirements.txt /tmp
-RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir \
- && rm -f /tmp/requirements.txt \
- && chown -R ${NB_USER}:users ${CONDA_DIR} \
- && chown -R ${NB_USER}:users ${HOME}
-
 # install - codeserver extensions
 RUN code-server --install-extension "ms-python.python@${CODESERVER_PYTHON_VERSION}" \
  && code-server --install-extension "eamodio.gitlens@${CODESERVER_GITLENS_VERSION}" \
