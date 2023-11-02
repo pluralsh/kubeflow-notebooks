@@ -3,16 +3,20 @@ FROM ghcr.io/pluralsh/kubeflow-notebooks-codeserver:2.4.0
 USER root
 
 # args - software versions
-ARG CODESERVER_PYTHON_VERSION=2023.14.0
-ARG CODESERVER_GITLENS_VERSION=14.2.1
+ARG CODESERVER_PYTHON_VERSION=2023.20.0
+ARG CODESERVER_GITLENS_VERSION=14.4.1
 ARG CODESERVER_GIT_GRAPH_VERSION=1.30.0
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
 ARG MINIFORGE_VERSION=23.3.1-1
+ # renovate: datasource=conda depName=conda-forge/conda versioning=semver
+ARG CONDA_VERSION=23.9.0
+ # renovate: datasource=conda depName=conda-forge/mamba versioning=semver
+ARG MAMBA_VERSION=1.5.3
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
 ARG PIP_VERSION=23.3.1
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
-ARG PYTHON_VERSION=3.11.6
+ARG PYTHON_VERSION=3.12.0
 
 # update - ensure apt packages are always updated
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -25,7 +29,14 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 ENV CONDA_DIR /opt/conda
 ENV PATH "${CONDA_DIR}/bin:${PATH}"
 RUN mkdir -p ${CONDA_DIR} \
- && chown -R ${NB_USER}:users ${CONDA_DIR}
+ && echo ". /opt/conda/etc/profile.d/conda.sh" >> ${HOME}/.bashrc \
+ && echo ". /opt/conda/etc/profile.d/conda.sh" >> /etc/profile \
+ && echo "conda activate base" >> ${HOME}/.bashrc \
+ && echo "conda activate base" >> /etc/profile \
+ && echo "mamba activate base" >> ${HOME}/.bashrc \
+ && echo "mamba activate base" >> /etc/profile \
+ && chown -R ${NB_USER}:users ${CONDA_DIR} \
+ && chown -R ${NB_USER}:users ${HOME}
 
 USER $NB_UID
 
@@ -38,21 +49,19 @@ RUN curl -sL "https://github.com/conda-forge/miniforge/releases/download/${MINIF
  && rm /tmp/Miniforge3.sh \
  && conda config --system --set auto_update_conda false \
  && conda config --system --set show_channel_urls true \
- && echo "conda ${MINIFORGE_VERSION:0:-2}" >> ${CONDA_DIR}/conda-meta/pinned \
- && echo "python ${PYTHON_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
- && conda install -y -q \
+ && mamba install -y -q \
     python=${PYTHON_VERSION} \
-    conda=${MINIFORGE_VERSION:0:-2} \
+    conda=${CONDA_VERSION} \
     pip=${PIP_VERSION} \
- && conda update -y -q --all \
- && conda clean -a -f -y \
- && chown -R ${NB_USER}:users ${CONDA_DIR} \
- && chown -R ${NB_USER}:users ${HOME}
-
-# install - requirements.txt
-COPY --chown=jovyan:users requirements.txt /tmp
-RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir \
- && rm -f /tmp/requirements.txt \
+    mamba=${MAMBA_VERSION} \
+ && echo "conda ${CONDA_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
+ && echo "mamba ${MAMBA_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
+ && echo "python ${PYTHON_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
+ && echo "pip ${PIP_VERSION}" >> ${CONDA_DIR}/conda-meta/pinned \
+ && mamba update -y -q --all \
+ && mamba clean -a -f -y \
+ && find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
+ && find ${CONDA_DIR} -follow -type f -name '*.pyc' -delete \
  && chown -R ${NB_USER}:users ${CONDA_DIR} \
  && chown -R ${NB_USER}:users ${HOME}
 
