@@ -1,4 +1,4 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-jupyter-pytorch:2.8.1
+FROM ghcr.io/pluralsh/kubeflow-notebooks-jupyter-pytorch:2.8.2
 
 USER root
 
