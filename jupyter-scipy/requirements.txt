@@ -2,7 +2,7 @@
 # elyra==3.15.0 # Temporarily disable due to incompatibility with JupyterLab 4.x and kfp v2
 kfp==2.4.0
 kfp-server-api==2.0.3
-kserve==0.11.1
+kserve==0.11.2
 
 # scipy packages
 # https://github.com/jupyter/docker-stacks/blob/main/images/scipy-notebook/Dockerfile
