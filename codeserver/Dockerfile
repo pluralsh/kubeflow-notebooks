@@ -1,4 +1,4 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-base:2.2.5
+FROM ghcr.io/pluralsh/kubeflow-notebooks-base:2.3.0
 
 USER root
 
