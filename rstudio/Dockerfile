@@ -11,7 +11,7 @@ ARG CONDA_VERSION=23.11.0
  # renovate: datasource=conda depName=conda-forge/mamba versioning=semver
 ARG MAMBA_VERSION=1.5.5
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
-ARG PIP_VERSION=23.3.1
+ARG PIP_VERSION=23.3.2
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
 ARG PYTHON_VERSION=3.12.0
 ARG RSTUDIO_ARCH="amd64"
