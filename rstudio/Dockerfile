@@ -20,7 +20,7 @@ ARG RSTUDIO_VERSION=2023.12.0+369
  # renovate: datasource=conda depName=conda-forge/r-base versioning=semver
 ARG R_BASE_VERSION=4.3.2
  # renovate: datasource=conda depName=conda-forge/r-reticulate versioning=semver
-ARG R_RETICULATE_VERSION=1.34.0
+ARG R_RETICULATE_VERSION=1.35.0
  # renovate: datasource=conda depName=conda-forge/r-png versioning=loose
 ARG R_PNG_VERSION=0.1_8
 
