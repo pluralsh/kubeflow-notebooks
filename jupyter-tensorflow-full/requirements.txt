@@ -19,4 +19,4 @@ seaborn==0.13.2
 xgboost==2.0.3
 
 # tensorflow packages
-keras==3.0.4
+keras==3.0.5
