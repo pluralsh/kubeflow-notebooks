@@ -10,7 +10,7 @@ cloudpickle==3.0.0
 dill==0.3.8
 ipympl==0.9.3
 ipywidgets==8.1.2
-matplotlib==3.8.2
+matplotlib==3.8.3
 pandas==2.2.0
 scikit-image==0.22.0
 scikit-learn==1.4.0
