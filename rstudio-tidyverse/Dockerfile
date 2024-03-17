@@ -1,4 +1,4 @@
-FROM ghcr.io/pluralsh/kubeflow-notebooks-rstudio:2.13.3
+FROM ghcr.io/pluralsh/kubeflow-notebooks-rstudio:2.13.4
 
 # args - software versions
  # renovate: datasource=conda depName=conda-forge/r-tidyverse versioning=semver
