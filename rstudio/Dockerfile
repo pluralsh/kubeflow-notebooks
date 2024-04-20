@@ -13,7 +13,7 @@ ARG MAMBA_VERSION=1.5.6
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
 ARG PIP_VERSION=23.3.2
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
-ARG PYTHON_VERSION=3.12.2
+ARG PYTHON_VERSION=3.12.3
 ARG RSTUDIO_ARCH="amd64"
  # renovate: datasource=github-tags depName=rstudio/rstudio versioning=loose
 ARG RSTUDIO_VERSION=2023.12.0+369
