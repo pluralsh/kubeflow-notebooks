@@ -8,7 +8,7 @@ ARG CODESERVER_GITLENS_VERSION=14.4.1
 ARG CODESERVER_GIT_GRAPH_VERSION=1.30.0
 ARG MINIFORGE_ARCH="x86_64"
  # renovate: datasource=github-tags depName=conda-forge/miniforge versioning=loose
-ARG MINIFORGE_VERSION=24.1.2-0
+ARG MINIFORGE_VERSION=24.3.0-0
  # renovate: datasource=conda depName=conda-forge/conda versioning=semver
 ARG CONDA_VERSION=23.11.0
  # renovate: datasource=conda depName=conda-forge/mamba versioning=semver
