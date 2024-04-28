@@ -10,7 +10,7 @@ ENV SHELL /bin/bash
 # args - software versions
 ARG KUBECTL_ARCH="amd64"
  # renovate: datasource=github-tags depName=kubernetes/kubernetes versioning=semver
-ARG KUBECTL_VERSION=v1.29.4
+ARG KUBECTL_VERSION=v1.30.0
 ARG S6_ARCH="x86_64"
  # renovate: datasource=github-tags depName=just-containers/s6-overlay versioning=loose
 ARG S6_VERSION=v3.1.6.2
