@@ -30,6 +30,6 @@ scipy==1.13.1
 seaborn==0.13.2
 sqlalchemy==2.0.31
 statsmodels==0.14.2
-sympy==1.12
+sympy==1.12.1
 tables==3.9.2
 xlrd==2.0.1
