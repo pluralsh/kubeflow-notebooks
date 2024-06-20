@@ -12,7 +12,7 @@ ARG MINIFORGE_VERSION=24.3.0-0
  # renovate: datasource=conda depName=conda-forge/conda versioning=semver
 ARG CONDA_VERSION=23.11.0
  # renovate: datasource=conda depName=conda-forge/mamba versioning=semver
-ARG MAMBA_VERSION=1.5.6
+ARG MAMBA_VERSION=1.5.8
  # renovate: datasource=conda depName=conda-forge/pip versioning=semver
 ARG PIP_VERSION=23.3.2
  # renovate: datasource=conda depName=conda-forge/python versioning=semver
