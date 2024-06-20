@@ -18,7 +18,7 @@ ARG RSTUDIO_ARCH="amd64"
  # renovate: datasource=github-tags depName=rstudio/rstudio versioning=loose
 ARG RSTUDIO_VERSION=2024.04.2+764
  # renovate: datasource=conda depName=conda-forge/r-base versioning=semver
-ARG R_BASE_VERSION=4.3.3
+ARG R_BASE_VERSION=4.4.1
  # renovate: datasource=conda depName=conda-forge/r-reticulate versioning=semver
 ARG R_RETICULATE_VERSION=1.36.1
  # renovate: datasource=conda depName=conda-forge/r-png versioning=loose
